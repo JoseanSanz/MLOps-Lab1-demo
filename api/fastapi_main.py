@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # Generar una aplicación FastAPI que use las funciones de calculadora del módulo mylib.calculator
 import uvicorn
 from fastapi import FastAPI, HTTPException
@@ -71,4 +69,4 @@ def calculate(data: CalcRequest):
 
 # Punto de entrada (solo para ejecución directa)
 if __name__ == "__main__":
-    uvicorn.run("fastapi_main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("api.fastapi_main:app", host="0.0.0.0", port=8000, reload=True)

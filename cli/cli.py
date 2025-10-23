@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Main CLI or app entry point
 """
