@@ -3,13 +3,13 @@ install:
 	uv sync
 
 test:
-	uv run python -m pytest -vv --cov=main --cov=mylib test_*.py
+	uv run python -m pytest tests/ -vv --cov=main --cov=mylib #test_*.py
 
 format:	
-	uv run black *.py mylib/*.py
+	uv run black mylib/*.py cli/*.py api/*.py #*.py
 
 lint:
-	uv run pylint --disable=R,C --ignore-patterns=test_.*\.py *.py mylib/*.py
+	uv run pylint --disable=R,C --ignore-patterns=test_.*\.py mylib/*.py cli/*.py api/*.py #*.py
 
 #container-lint:
 #	docker run --rm -i hadolint/hadolint < Dockerfile

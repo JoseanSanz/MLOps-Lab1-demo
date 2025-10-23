@@ -3,7 +3,7 @@ Test goes here
 
 """
 
-from main import cli
+from cli.main import cli
 from mylib.calculator import add, subtract, multiply, divide, power
 from click.testing import CliRunner
 
