@@ -3,21 +3,14 @@ install:
 	uv sync
 
 test:
-	uv run python -m pytest tests/ -vv --cov=main --cov=mylib #test_*.py
+	uv run python -m pytest tests/ -vv --cov=mylib --cov=api --cov=cli 
 
 format:	
 	uv run black mylib/*.py cli/*.py api/*.py #*.py
 
 lint:
-	uv run pylint --disable=R,C --ignore-patterns=test_.*\.py mylib/*.py cli/*.py api/*.py #*.py
-
-#container-lint:
-#	docker run --rm -i hadolint/hadolint < Dockerfile
+	uv run pylint --disable=R,C --ignore-patterns=test_.*\.py mylib/*.py cli/*.py api/*.py 
 
 refactor: format lint
 
-#deploy:
-#	#deploy goes here
-		
 all: install lint test format
-#all: install lint test format deploy

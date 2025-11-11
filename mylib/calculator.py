@@ -1,5 +1,5 @@
 """
-Calculations library
+Calculator library
 """
 
 
@@ -23,7 +23,6 @@ def divide(a, b):
     return a / b
 
 
-# Crea una función para elevar un número a a la potencia b
 def power(a, b):
     """Returns a raised to the power of b."""
     return a**b

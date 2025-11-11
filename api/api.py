@@ -1,4 +1,4 @@
-# Generar una aplicación FastAPI que use las funciones de calculadora del módulo mylib.calculator
+# Import the libraries, classes and functions
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.templating import Jinja2Templates
@@ -7,46 +7,42 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from mylib.calculator import add, subtract, multiply, divide, power
 
-# Crear instancia de FastAPI
+# Create an instance of FastAPI
 app = FastAPI(
-    title="API de Calculadora con FastAPI",
-    description="API para realizar operaciones aritméticas básicas usando mylib.calculator",
+    title="API of the Calculator using FastAPI",
+    description="API to perform arithmetical operations using mylib.calculator",
     version="1.0.0",
 )
 
+# We use the templates folder to obtain HTML files
+templates = Jinja2Templates(directory="templates")
 
-# Modelo de entrada con Pydantic
+
+# Initial endpoint
+@app.get("/", response_class=HTMLResponse)
+def home(request: Request):
+    return templates.TemplateResponse(request, "home.html")
+
+
+# Input class (with Pydantic) to define the input arguments of the calculator
 class CalcRequest(BaseModel):
     operation: str
     a: float
     b: float
 
 
-templates = Jinja2Templates(directory="templates")
-
-
-# Endpoint raíz
-@app.get("/", response_class=HTMLResponse)
-def home(request: Request):
-    return templates.TemplateResponse(request, "home.html")
-
-
-# def home():
-#     return {"message": "API FastAPI funcionando correctamente"}
-
-
-# Endpoint principal para operaciones
+# Main endpoint to perform the artihmetical operations using the input class defined with Pydantic
 @app.post("/calculate")
 def calculate(data: CalcRequest):
     """
-    Realiza una operación matemática según los parámetros recibidos.
+    It performs an arithmetical operation according to the input parameters.
     """
     op = data.operation.lower()
     a = data.a
     b = data.b
 
     if op not in ["add", "subtract", "multiply", "divide", "power"]:
-        raise HTTPException(status_code=400, detail="Operación no válida")
+        raise HTTPException(status_code=400, detail="Unvalid operation")
 
     result = None
     if op == "add":
@@ -57,9 +53,7 @@ def calculate(data: CalcRequest):
         result = multiply(a, b)
     elif op == "divide":
         if b == 0:
-            raise HTTPException(
-                status_code=400, detail="División por cero no permitida"
-            )
+            raise HTTPException(status_code=400, detail="Zero division not allowed")
         result = divide(a, b)
     elif op == "power":
         result = power(a, b)
@@ -67,6 +61,6 @@ def calculate(data: CalcRequest):
     return {"result": result}
 
 
-# Punto de entrada (solo para ejecución directa)
+# Entry point (for direct execution only)
 if __name__ == "__main__":
-    uvicorn.run("api.fastapi_main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("api.api:app", host="0.0.0.0", port=8000, reload=True)
