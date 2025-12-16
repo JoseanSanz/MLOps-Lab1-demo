@@ -1,6 +1,6 @@
-# 1. Fuerza el uso de Bash para comandos complejos y consistencia.
+# We use Bash for complex commands and consistency
 SHELL := /bin/bash
-# 2. Asegura que ~/.local/bin (donde uv se puede instalar) esté en el PATH.
+# We ensure that ~/.local/bin (where uv can be installed) is in the PATH
 PATH := $(HOME)/.local/bin:$(PATH)
 
 install:
