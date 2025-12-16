@@ -1,3 +1,8 @@
+# 1. Fuerza el uso de Bash para comandos complejos y consistencia.
+SHELL := /bin/bash
+# 2. Asegura que ~/.local/bin (donde uv se puede instalar) esté en el PATH.
+PATH := $(HOME)/.local/bin:$(PATH)
+
 install:
 	@if ! command -v uv &> /dev/null; then \
 		curl -LsSf https://astral.sh/uv/install.sh | sh; \
