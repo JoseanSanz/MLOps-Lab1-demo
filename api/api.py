@@ -25,13 +25,6 @@ def home(request: Request):
     return templates.TemplateResponse(request, "home.html")
 
 
-# # Input class (with Pydantic) to define the input arguments of the calculator
-# class CalcRequest(BaseModel):
-#     operation: str
-#     a: float
-#     b: float
-
-
 # Main endpoint to perform the artihmetical operations using the input class defined with Pydantic
 @app.post("/calculate")
 async def calculate(op: str = Form(), a: float = Form(), b: float = Form()):
@@ -59,6 +52,11 @@ async def calculate(op: str = Form(), a: float = Form(), b: float = Form()):
 
     return {"result": result}
 
+# # Input class (with Pydantic) to define the input arguments of the calculator
+# class CalcRequest(BaseModel):
+#     operation: str
+#     a: float
+#     b: float
 
 # # Main endpoint to perform the artihmetical operations using the input class defined with Pydantic
 # @app.post("/calculate")
